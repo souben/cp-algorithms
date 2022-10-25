@@ -1,0 +1,19 @@
+9 9
+ca
+cb
+cc
+cd
+ce
+da
+db 
+dc
+dd
+ca cb
+ca cc
+cb cd
+cb ce
+cd ce
+da db
+da dd
+db dc
+dd dc
