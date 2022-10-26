@@ -13,11 +13,11 @@ int in_deg[N];
 int vis[N];
 
 void dfs(int src){
-	vis[src] = 1;
 	path.push_back(src);
+	vis[src] = 1;
 	for(auto& i: adj[src]){
-		if(!in_deg[i]) continue;
-		dfs(i);
+		in_deg[i]--;
+		if(!in_deg[i]) dfs(i);
 	} 	
 }
 
@@ -34,21 +34,22 @@ int main(){
 		       adj[i].clear();
 		       in_deg[i] = 0;
 		       root[i] = i;
+		       vis[i] = 0;
 		}	       
 		
 		for(int i=1; i <= m; i++){
 			int u, v; cin >> u >> v;
 			if(root[u] != root[v]){
 				adj[u].push_back(v);
+				in_deg[v]++;
 				root[root[v]] = root[u];
 				for(int j=1; j <=n ; j++)
 					if(root[j]==root[v]) root[j] = root[u];
 			}
 		}
 
-		dfs(1);
 		for(auto i=1; i <= n; i++){
-			if(!vis[i]) dfs(i);
+			if(!in_deg[i] && !vis[i]) dfs(i);
 		}		
 
 		for(auto& i : path) cout << i << " ";
