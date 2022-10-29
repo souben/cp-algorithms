@@ -24,18 +24,17 @@ void bfs(int n){
 			return;
 		}
 		q.pop();
-		vis[a.F] =  1;
-		if( a.F >= m  ) 
-			q.push(make_pair( m, a.S + (a.F-m) ));
-		else	
-			if( a.F-1 > 0 ) q.push(make_pair(a.F-1, a.S + 1 ));
+		vis[a.F] =  1;	
+		if( a.F <= m/2+1 && !vis[2*a.F]) q.push( make_pair(2 * a.F, a.S + 1));
+		if( a.F-1 > 0 && a.F <= m+1 && !vis[a.F-1]) q.push(make_pair(a.F-1, a.S + 1 ));
 
-		if( a.F <= m/2 ) q.push( make_pair(2 * a.F, a.S + 1));
 	}
 }
 
 int main(){
 	cin >> n >> m;
-	if( n != m ) bfs(n);
+	if( n > m ) cnt = n-m;
+	else if ( n == m ) cnt = 0;
+	else bfs(n);
 	cout << cnt << endl;
 }
